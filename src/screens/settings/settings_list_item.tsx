@@ -1,4 +1,4 @@
-import {Text, Pressable, Stack} from 'native-base';
+import {Text, Pressable, HStack, Box} from 'native-base';
 import {memo} from 'react';
 import {push} from '@/navigation/root_navigation';
 import {RootStackParamList, translateRoute} from '@/navigation/types';
@@ -14,19 +14,38 @@ type SettingsListItemOptions = {
 
 function SettingsListItem({item}: SettingsListItemOptions): React.JSX.Element {
   return (
-    <Pressable onPress={() => push(item.name)}>
+    <Pressable onPress={() => push(item.name)} mx="3" mb="2">
       {({isPressed}) => {
         return (
-          <Stack
-            flexDirection="row"
-            backgroundColor={isPressed ? 'coolGray.300:alpha.20' : undefined}
+          <HStack
+            borderRadius="lg"
+            px="3"
             py="3"
-            alignItems="center">
-            <item.icon size="4xl" mx="2"></item.icon>
-            <Text flex={1} flexWrap="wrap">
+            alignItems="center"
+            bg={
+              isPressed
+                ? {
+                    _light: 'coolGray.200',
+                    _dark: 'coolGray.700',
+                  }
+                : {
+                    _light: 'white',
+                    _dark: 'coolGray.800',
+                  }
+            }
+            shadow="1">
+            <Box
+              bg={{_light: 'cyan.100', _dark: 'cyan.900'}}
+              borderRadius="md"
+              p="1.5"
+              mr="3">
+              <item.icon size="xl" color={{_light: 'cyan.700', _dark: 'cyan.300'}} />
+            </Box>
+            <Text flex={1} flexWrap="wrap" fontWeight="medium">
               {translateRoute(item.name)}
             </Text>
-          </Stack>
+            <Text color="muted.400" fontSize="lg">›</Text>
+          </HStack>
         );
       }}
     </Pressable>

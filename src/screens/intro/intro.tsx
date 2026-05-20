@@ -87,10 +87,14 @@ export function Intro() {
 
   return (
     <SafeArea>
-      <Stack flex="1">
+      <Stack flex="1" bg={{_light: 'white', _dark: 'coolGray.900'}}>
         <AppIntroSlider<Item>
           keyExtractor={_keyExtractor}
-          dotStyle={{borderColor: 'gray', borderWidth: 1}}
+          dotStyle={{
+            borderColor: 'rgba(34,211,238,0.4)',
+            borderWidth: 1,
+            backgroundColor: 'rgba(34,211,238,0.15)',
+          }}
           dotClickEnabled={false}
           activeDotStyle={{
             borderColor: '#22d3ee',
@@ -113,14 +117,18 @@ export function Intro() {
           size="full"
           isOpen={configAlertIsOpen}
           onClose={onConfigAlertClose}>
-          <Modal.Content borderRadius={0}>
+          <Modal.Content borderRadius="xl">
             <Modal.CloseButton />
-            <Modal.Header>{t`Attention`}</Modal.Header>
+            <Modal.Header
+              bg={{_light: 'cyan.500', _dark: 'cyan.700'}}
+              _text={{color: 'white', fontWeight: 'bold'}}>
+              {t`Attention`}
+            </Modal.Header>
             <Modal.Body>
               {t`Required settings are incomplete. For app to show prayer times, You have to configure it from settings later.`}
             </Modal.Body>
             <Modal.Footer>
-              <Button colorScheme="coolGray" onPress={onConfigAlertOk}>
+              <Button colorScheme="cyan" borderRadius="full" onPress={onConfigAlertOk}>
                 {t`Got it`}
               </Button>
             </Modal.Footer>

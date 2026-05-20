@@ -89,6 +89,9 @@ export type SettingsStore = {
   // monthly view
   HIJRI_MONTHLY_VIEW: boolean;
 
+  // daylight saving time
+  OBSERVE_DST: boolean;
+
   computed: {
     themeColor: Required<ColorMode>;
   };
@@ -174,6 +177,9 @@ export const settings = createStore<SettingsStore>()(
       USE_DIFFERENT_ALARM_TYPE: false,
       // monthly view
       HIJRI_MONTHLY_VIEW: false,
+
+      // daylight saving time
+      OBSERVE_DST: true,
 
       computed: {
         get themeColor() {
@@ -332,7 +338,7 @@ export const settings = createStore<SettingsStore>()(
         Object.fromEntries(
           Object.entries(state).filter(([key]) => !invalidKeys.includes(key)),
         ),
-      version: 11,
+      version: 12,
       migrate: (persistedState, version) => {
         /* eslint-disable no-fallthrough */
         // fall through cases is exactly the use case for migration.
@@ -412,6 +418,9 @@ export const settings = createStore<SettingsStore>()(
               'reminder-channel',
               'reminder-dnd-channel',
             ].map(notifee.deleteChannel);
+          case 11:
+            // added OBSERVE_DST in version 12
+            (persistedState as SettingsStore).OBSERVE_DST = true;
             break;
         }
         /* eslint-enable no-fallthrough */

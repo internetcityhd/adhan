@@ -83,7 +83,7 @@ function Settings() {
 
   return (
     <SafeArea>
-      <Stack py="3">
+      <Stack py="3" bg={{_light: 'coolGray.100', _dark: 'coolGray.900'}} flex={1}>
         <FlatList data={settingsScreenList} renderItem={renderItem}></FlatList>
       </Stack>
     </SafeArea>
